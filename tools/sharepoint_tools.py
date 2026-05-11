@@ -41,4 +41,4 @@ def get_sharepoint_sites_count() -> str:
 
     count = result.stdout.strip()
 
-    return f"Total SharePoint Sites Count: {count}"
+    return f"Total SharePoint Sites Counts: {count}"
