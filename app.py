@@ -1,4 +1,3 @@
-# from tools.sharepoint_tools import get_sharepoint_sites_count
 from pathlib import Path
 import importlib.util
 from deepagents import create_deep_agent
@@ -37,12 +36,13 @@ module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 
 get_sharepoint_sitecount = module.get_sharepoint_sitecount
+get_sharepoint_sites_size = module.get_sharepoint_sites_size
 
 memory_saver = MemorySaver()
 
 agent = create_deep_agent(
     model=model,
-    tools=[get_sharepoint_sitecount],
+    tools=[get_sharepoint_sitecount, get_sharepoint_sites_size],
     skills=["./skills"],
     checkpointer=memory_saver
 )

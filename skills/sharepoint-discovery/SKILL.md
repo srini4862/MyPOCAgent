@@ -44,3 +44,31 @@ Returns:
   "TotalSiteCount": 1250
 }
 ```
+
+### get_sharepoint_sites_size
+
+Purpose:
+Returns the total storage size of all SharePoint Online site collections in GB.
+
+Use this tool when the user asks:
+- Total SharePoint storage size
+- SharePoint tenant size
+- SharePoint migration sizing
+- SharePoint storage assessment
+- SharePoint capacity analysis
+- Total SharePoint data volume
+
+Backend Script:
+./scripts/get-sharepoint-sites-size.ps1
+
+Parameters:
+- tenant_name
+- client_id
+
+Returns:
+
+```json
+{
+  "TotalSizeGB": 523.44
+}
+```

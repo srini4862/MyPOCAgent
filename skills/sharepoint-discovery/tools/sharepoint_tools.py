@@ -63,3 +63,59 @@ def get_sharepoint_sitecount(
         raise Exception("Script returned empty output")
 
     return json.loads(stdout)
+
+
+@tool
+def get_sharepoint_sites_size(
+    tenant_name: str,
+    client_id: str
+) -> dict:
+    """
+    Returns the total size of all SharePoint Online site collections in GB.
+
+    Use this tool when the user asks about:
+    - SharePoint storage size
+    - SharePoint total size
+    - SharePoint migration sizing
+    - SharePoint storage assessment
+    - SharePoint capacity analysis
+    - SharePoint inventory sizing
+
+    Parameters:
+    - tenant_name: Microsoft 365 tenant name
+    - client_id: Azure AD App Registration Client ID
+
+    Returns:
+    {
+        "TotalSizeGB": number
+    }
+    """
+
+    SCRIPT_PATH = SCRIPT_BASE_PATH / "get-sharepoint-sites-size.ps1"
+
+    command = [
+        "pwsh",
+        str(SCRIPT_PATH),
+        "-TenantName",
+        tenant_name,
+        "-ClientId",
+        client_id
+    ]
+
+    result = subprocess.run(
+        command,
+        capture_output=True,
+        text=True
+    )
+
+    if result.returncode != 0:
+        raise Exception(
+            f"PowerShell script execution failed: {result.stderr}"
+        )
+
+    stdout = result.stdout.strip()
+
+    if not stdout:
+        raise Exception("Script returned empty output")
+
+    return json.loads(stdout)
